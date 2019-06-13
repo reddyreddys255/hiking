@@ -1,2 +1,2 @@
 # hiking
-All Trails Hiking Data and Personalization
+AllTrails Hiking Data and Personalization
