@@ -8,9 +8,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
 sf_hikes = tc.SFrame('Data/all_hikes_with_hike_name.csv')
-hikes = list(sf_hikes['hike_name'])
 sf_ratings = tc.SFrame('Data/all_ratings_matrix.csv')
-hike_side_data = tc.SFrame('Data/all_hikes_with_hike_id.csv')
 with open('Data/all_hike_ids.pkl') as f:
 	hike_ids = pickle.load(f)
 
