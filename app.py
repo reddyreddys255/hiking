@@ -14,7 +14,7 @@ hike_side_data = tc.SFrame('Data/all_hikes_with_hike_id.csv')
 with open('Data/all_hike_ids.pkl') as f:
 	hike_ids = pickle.load(f)
 
-with open('../Data/all_user_ids.pkl') as f:
+with open('Data/all_user_ids.pkl') as f:
 	user_ids = pickle.load(f)
 
 content_model = tc.load_model('web_app/hike_content_recommender')
