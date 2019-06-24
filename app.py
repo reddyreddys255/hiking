@@ -127,5 +127,5 @@ def get_power():
 	best_hikes = top_five(recs)	
 	return render_template('power-ratings.html', best_hikes=best_hikes)
 
-
-app.run(port=5000, use_reloader=True)
+if __name__ == '__main__':
+	app.run()
