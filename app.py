@@ -128,4 +128,4 @@ def get_power():
 	return render_template('power-ratings.html', best_hikes=best_hikes)
 
 
-app.run(use_reloader=True)
+app.run(port=6060, use_reloader=True)
