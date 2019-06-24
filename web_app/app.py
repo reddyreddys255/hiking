@@ -130,4 +130,4 @@ if __name__ == '__main__':
 	popular_stars_model = tc.load_model('hike_popularity_stars_recommender')
 	rf_model = tc.load_model('rank_factorization_recommender')
 
-	app.run(host='0.0.0.0', port=1111, debug=True)
+	app.run()
