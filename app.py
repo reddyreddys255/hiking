@@ -43,6 +43,15 @@ def get_hike_info(recs):
 		hike_info.append(info)
 	return hike_info
 
+def get_stars_info(recs):
+	hike_info = []
+	for rec in recs:
+		hike = rec['hike_id']
+		info = sf_hikes[sf_hikes['hike_id']==hike]
+		info['stars'] = rec['value']
+		hike_info.append(info)
+	return hike_info
+
 def top_five(recs):
     hike_info = []
     for rec in recs:
