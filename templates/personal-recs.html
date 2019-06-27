@@ -50,16 +50,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="page-scroll" href="#about">About</a>
+                        <a class="page-scroll" href="https://medium.com/@perryrjohnson7/personalize-your-hiking-with-a-recommendation-engine-7c94cd092c57">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Services</a>
+                        <a class="page-scroll" href="https://github.com/perryrjohnson/hiking">GitHub</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#repo">GitHub</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a class="page-scroll" href="mailto:perryrjohnson7@gmail.com">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -75,16 +72,15 @@
           <div class="container">
                 <div class="row">
                      <div class="col-lg-12 text-center">
-                         <h2 class="section-heading">Personalized Recommendeded Hikes Based on How You Rate Hikes</h2>
-                        <h3 class="section-heading">Hikes You've Rated</h3>
+                         <h2 class="section-heading">Find Better Hikes with Personalization</h2>
                                              <br>
-                        <p style="color:black;font-size:20px" class="text-faded"> You Can Check Out More On Our Scoring Methodology Here</p>
+                        <p style="color:black;font-size:20px" class="text-faded"> You Can Check Out More On Our Scoring Methodology <a href=/scoring-method>Here</a></p>
                          <hr class="primary">
                       </div>
-                 </div> 
-                   </table>       
+                 </div>       
                  <div class="container">
                         <div class="row">
+                        <h3 class="section-heading">Personalized Suggested Hikes</h3>   
                       <table class="table" id="recommendations-table">
                           <tr>
                               <th id='recommendations-table'>Hike Name</th>
@@ -101,6 +97,24 @@
                              </tr>
                                {% endfor %}
                        </table>
+                        <h3 class="section-heading">Hikes You've Rated</h3>
+                      <table class="table" id="recommendations-table">
+                          <tr>
+                              <th id='recommendations-table'>Hike Name</th>
+                              <th id='recommendations-table'>Your Rating</th>
+                              <th id='recommendations-table'>Round Trip Distance (miles)</th>
+                              <th id='recommendations-table'>Elevation Gain (ft)</th>                              
+                            </tr>
+                               {% for hike in your_hikes %}
+                            <tr>
+                                <td><a href="{{hike['hike_url'][0]}}">{{hike['hike_name'][0]}}</a></td>
+                                <td>{{hike['stars'][0]}}</td>
+                                <td>{{hike['total_distance'][0]}}</td>
+                                <td>{{hike['elevation_gain'][0]}}</td>                                
+                             </tr>
+                               {% endfor %}
+                       </table>
+                       
                 <a href="/username" class="btn btn-primary btn-xl page-scroll">Find Another!</a>
                 </div>
             </div>
