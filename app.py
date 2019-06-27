@@ -53,6 +53,10 @@ def top_five(recs):
 def index():
 	return render_template('index.html')
 
+@app.route('/scoring-method')
+def scoring():
+	return render_template('scoring-method.html')
+
 @app.route('/username', methods=['GET', 'POST'])
 def username():
 	names = user_ids.keys()
@@ -69,9 +73,9 @@ def enter_username():
 	try:
 		user_id = user_ids[username]
 	except:
-		return render_template('error.html')	
+		return render_template('username-error.html')	
 	if username == '':
-		return render_template('error.html')
+		return render_template('username-error.html')
 	else:
 		recs = rf_model.recommend(users = [user_id], k=5)
 		print(recs)
