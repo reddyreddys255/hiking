@@ -61,13 +61,11 @@ def scoring():
 
 @app.route('/username', methods=['GET', 'POST'])
 def username():
-	names = user_ids.keys()
-	return render_template('username.html', names=names)
+	return render_template('username.html')
 
 @app.route('/choose-hike', methods=['GET', 'POST'])
 def enter_hike():
-	hikes = hike_ids.values()
-	return render_template('choose-hike.html', hikes=hikes)
+	return render_template('choose-hike.html')
 
 @app.route('/personal-recs', methods=['GET', 'POST'])
 def enter_username():
