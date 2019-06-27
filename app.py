@@ -4,6 +4,9 @@ import turicreate as tc
 import pickle
 import random
 import sys
+from rq import Queue
+from worker import conn
+from utils import count_words_at_url
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -23,6 +26,10 @@ rf_model = tc.load_model('web_app/rank_factorization_recommender')
 
 
 app = Flask(__name__)
+
+q = Queue(connection=conn)
+
+result = q.enqueue(count_words_at_url, 'http://heroku.com')
 
 def get_info(hike):
 	data = sf_hikes[sf_hikes['hike_name']==hike]
