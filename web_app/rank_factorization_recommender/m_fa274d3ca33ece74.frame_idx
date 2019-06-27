@@ -1,0 +1,13 @@
+[sframe]
+version=0
+num_segments=0
+num_columns=3
+nrows=2660
+[column_names]
+0000=hike_id
+0001=linear_terms
+0002=factors
+[column_files]
+0000=m_fa274d3ca33ece74.sidx:0
+0001=m_fa274d3ca33ece74.sidx:1
+0002=m_fa274d3ca33ece74.sidx:2
