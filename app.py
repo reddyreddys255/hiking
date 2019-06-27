@@ -10,9 +10,11 @@ sys.setdefaultencoding('utf8')
 sf_hikes = tc.SFrame('Data/all_hikes_with_hike_name.csv')
 sf_ratings = tc.SFrame('Data/all_ratings_matrix.csv')
 
-
 with open('Data/all_user_ids.pkl') as f:
 	user_ids = pickle.load(f)
+	
+with open('Data/all_hike_ids.pkl') as f:
+	hike_ids = pickle.load(f)	
 
 content_model = tc.load_model('web_app/hike_content_recommender')
 popular_count_model = tc.load_model('web_app/hike_popularity_count_recommender')
@@ -21,13 +23,6 @@ rf_model = tc.load_model('web_app/rank_factorization_recommender')
 
 
 app = Flask(__name__)
-
-
-def list_hikes(sf_hikes):
-	hikes = []
-	for h in sf_hikes['hike_name']:
-		hikes.append(h)
-	return hikes
 
 def get_info(hike):
 	data = sf_hikes[sf_hikes['hike_name']==hike]
@@ -64,7 +59,7 @@ def username():
 
 @app.route('/choose-hike', methods=['GET', 'POST'])
 def enter_hike():
-	hikes = list_hikes(sf_hikes)
+	hikes = hike_ids.values()
 	return render_template('choose-hike.html', hikes=hikes)
 
 @app.route('/personal-recs', methods=['GET', 'POST'])
@@ -77,26 +72,28 @@ def enter_username():
 	if username == '':
 		return render_template('username-error.html')
 	else:
-		recs = rf_model.recommend(users = [user_id], k=5)
-		print(recs)
+		hike_id_list = sf_ratings[sf_ratings['variable'] == user_id]
+		your_hikes = get_stars_info(hike_id_list)
+		recs = rf_model.recommend(users = [user_id], k=10)
 		hike_data = get_hike_info(recs)
-		return render_template('personal-recs.html', hike_data=hike_data)
+		print(recs)
+		return render_template('personal-recs.html', hike_data=hike_data, your_hikes = your_hikes)
 
 @app.route('/make-recommendations', methods=['POST', 'GET'])
 def get_recommendations():
 	hike = request.form.get('hike-name')
-	if hike == '':
-		return render_template('error.html')
-	else:
+	if hike in hike_ids.values():
 		recs = content_model.recommend_from_interactions(observed_items=[hike], k=10)
 		hike_data = []
 		for rec in recs:
 			name = rec['hike_name']
 			info = get_info(name)
-			info['score'] = "{:.1%}".format(rec['score'])
+			info['score'] = "{:.2}".format(rec['score'])
 			hike_data.append(info)
 		your_hike = get_info(hike)
-		return render_template('make-recommendations.html', your_hike=your_hike, hike_data=hike_data)
+		return render_template('make-recommendations.html', your_hike=your_hike, hike_data=hike_data)		
+	else:	
+		return render_template('error.html')
 
 @app.route('/most-reviewed', methods=['POST', 'GET'])
 def get_popular():
