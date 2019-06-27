@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Find Your Trail</title>
+    <title>Trail Secrets</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -90,7 +90,7 @@
                           <th id='hike-table'>Elevation Gain (ft)</th>
                         </tr>
                         <tr>
-                            <td>{{your_hike['hike_name'][0]}}</td>
+                            <td><a href="{{your_hike['hike_url'][0]}}">{{your_hike['hike_name'][0]}}</a></td>
                             <td>{{your_hike['hike_region'][0]}}</td>
                             <td>{{your_hike['total_distance'][0]}}</td>
                             <td>{{your_hike['elevation_gain'][0]}}</td>

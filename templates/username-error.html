@@ -73,32 +73,17 @@
           <div class="container">
                 <div class="row">
                      <div class="col-lg-12 text-center">
-                         <h2 class="section-heading">Most Reviewed Hikes</h2>
-                        <br>
-                        <p style="color:black;font-size:20px" class="text-faded"> You Can Check Out More On Our Scoring Methodology Here</p>
+                         <h2 class="section-heading">Similar Hikes</h2>
                          <hr class="primary">
                       </div>
                  </div>
-                      <table class="table" id="recommendations-table">
-                          <tr>
-                              <th id='recommendations-table'>Hike Name</th>
-                              <th id='recommendations-table'>Park/Area</th>
-                              <th id='recommendations-table'>Round Trip Distance (miles)</th>
-                              <th id='recommendations-table'>Elevation Gain (ft)</th>
-                              <th id='recommendations-table'>Number of Reviews</th>
-                            </tr>
-                               {% for hike in best_hikes %}
-                            <tr>
-                                <td><a href="{{hike['hike_url'][0]}}">{{hike['hike_name'][0]}}</a></td>
-                                <td>{{hike['hike_region'][0]}}</td>
-                                <td>{{hike['total_distance'][0]}}</td>
-                                <td>{{hike['elevation_gain'][0]}}</td>
-                                <td>{{hike['num_reviews'][0]}}</td>
-                             </tr>
-                               {% endfor %}
-                       </table>
-                <a href="/" class="btn btn-primary btn-xl page-scroll">Back to Homepage</a>
-                </div>
+                 <div class="container">
+                     <div class="row">
+                       <ul class="list-inline text-left">
+                           <p style="color:black;font-size:20px" class="text-faded">Sorry. That full name doesn't appear to have reviewed a hike in Washington state. Are you sure you typed in your name exactly how it's specified on <a href="https://www.alltrails.com/members?ref=header">AllTrails</a>?</p>
+                     </div>
+                  </div>
+                <a href="/choose-hike" class="btn btn-primary btn-xl page-scroll">Try Again</a>
             </div>
       </section>
 

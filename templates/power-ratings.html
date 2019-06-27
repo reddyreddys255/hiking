@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Take A Hike</title>
+    <title>Trail Secrets</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Take A Hike</a>
+                <a class="navbar-brand page-scroll" href="#page-top">Trail Secrets</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -86,15 +86,17 @@
                               <th id='recommendations-table'>Park/Area</th>
                               <th id='recommendations-table'>Round Trip Distance (miles)</th>
                               <th id='recommendations-table'>Elevation Gain (ft)</th>
+                              <th id='recommendations-table'>Total Distance (miles)</th>                              
 
                             </tr>
                                {% for hike in best_hikes %}
                             <tr>
+                                <td>{{hike['power_rating'][0]}}</td>
                                 <td><a href="{{hike['hike_url'][0]}}">{{hike['hike_name'][0]}}</a></td>
-                                <td>{{hike['hike_name'][0]}}</td>
                                 <td>{{hike['hike_region'][0]}}</td>
                                 <td>{{hike['total_distance'][0]}}</td>
                                 <td>{{hike['elevation_gain'][0]}}</td>
+                                <td>{{hike['total_distance'][0]}}</td>
                              </tr>
                                {% endfor %}
                        </table>
