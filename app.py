@@ -89,7 +89,6 @@ def enter_username():
 		your_hikes = get_stars_info(hike_id_list)
 		recs = rf_model.recommend(users = [user_id], k=15)
 		hike_data = get_hike_info(recs)
-		print(recs)
 		return render_template('personal-recs.html', hike_data=hike_data, your_hikes = your_hikes)
 
 @app.route('/make-recommendations', methods=['POST', 'GET'])
@@ -112,7 +111,6 @@ def get_recommendations():
 def get_popular():
     recs = []
     rec = sf_hikes.sort('num_reviews', ascending=False)
-    print(rec)
     for h_id in rec[0:30]:
         hike = h_id['hike_id']
         recs.append(hike)
