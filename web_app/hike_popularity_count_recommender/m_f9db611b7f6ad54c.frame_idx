@@ -1,0 +1,11 @@
+[sframe]
+version=0
+num_segments=0
+num_columns=2
+nrows=2322
+[column_names]
+0000=hike_id
+0001=prediction
+[column_files]
+0000=m_f9db611b7f6ad54c.sidx:0
+0001=m_f9db611b7f6ad54c.sidx:1
