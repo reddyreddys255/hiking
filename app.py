@@ -20,8 +20,6 @@ with open('Data/all_hike_ids.pkl') as f:
 	hike_ids = pickle.load(f)	
 
 content_model = tc.load_model('web_app/hike_content_recommender')
-popular_count_model = tc.load_model('web_app/hike_popularity_count_recommender')
-popular_stars_model = tc.load_model('web_app/hike_popularity_stars_recommender')
 rf_model = tc.load_model('web_app/rank_factorization_recommender')
 
 
@@ -58,7 +56,6 @@ def top_five(recs):
         info = sf_hikes[sf_hikes['hike_id']==rec]
         hike_info.append(info)
     return hike_info
-  
 
 @app.route('/')
 def index():
@@ -66,15 +63,17 @@ def index():
 
 @app.route('/scoring-method')
 def scoring():
-	return render_template('scoring-method.html')
+	return render_template('scoring-method.html')	
 
 @app.route('/username', methods=['GET', 'POST'])
 def username():
-	return render_template('username.html')
+	#names = user_ids.keys()
+	return render_template('username.html')#, names=names)
 
 @app.route('/choose-hike', methods=['GET', 'POST'])
 def enter_hike():
-	return render_template('choose-hike.html')
+	#hikes = hike_ids.values()
+	return render_template('choose-hike.html')#, hikes=hikes)
 
 @app.route('/personal-recs', methods=['GET', 'POST'])
 def enter_username():
@@ -88,7 +87,7 @@ def enter_username():
 	else:
 		hike_id_list = sf_ratings[sf_ratings['variable'] == user_id]
 		your_hikes = get_stars_info(hike_id_list)
-		recs = rf_model.recommend(users = [user_id], k=10)
+		recs = rf_model.recommend(users = [user_id], k=15)
 		hike_data = get_hike_info(recs)
 		print(recs)
 		return render_template('personal-recs.html', hike_data=hike_data, your_hikes = your_hikes)
@@ -96,8 +95,8 @@ def enter_username():
 @app.route('/make-recommendations', methods=['POST', 'GET'])
 def get_recommendations():
 	hike = request.form.get('hike-name')
-	if hike in hike_ids.values():
-		recs = content_model.recommend_from_interactions(observed_items=[hike], k=10)
+	if hike in hike_ids.values(): 
+		recs = content_model.recommend_from_interactions(observed_items=[hike], k=15)
 		hike_data = []
 		for rec in recs:
 			name = rec['hike_name']
@@ -112,8 +111,9 @@ def get_recommendations():
 @app.route('/most-reviewed', methods=['POST', 'GET'])
 def get_popular():
     recs = []
-    rec = popular_count_model.recommend(k=10)
-    for h_id in rec[0:10]:
+    rec = sf_hikes.sort('num_reviews', ascending=False)
+    print(rec)
+    for h_id in rec[0:30]:
         hike = h_id['hike_id']
         recs.append(hike)
     best_hikes = top_five(recs)
@@ -122,8 +122,9 @@ def get_popular():
 @app.route('/highest-rated', methods=['POST', 'GET'])
 def get_highest():
     recs = []
-    rec = popular_stars_model.recommend(k=10)
-    for h_id in rec[0:10]:
+    cleaned = sf_hikes[sf_hikes['num_reviews'] >= 100]
+    rec = cleaned.sort('stars', ascending=False)
+    for h_id in rec[0:30]:
         hike = h_id['hike_id']
         recs.append(hike)   
     best_hikes = top_five(recs)
@@ -133,7 +134,7 @@ def get_highest():
 def get_power():
 	recs = []
 	power_ratings = sf_hikes.sort('power_rating', ascending=False)
-	for h_id in power_ratings[0:10]:
+	for h_id in power_ratings[0:30]:
 		hike = h_id['hike_id']
 		recs.append(hike)
 	best_hikes = top_five(recs)	
