@@ -72,8 +72,8 @@ def username():
 
 @app.route('/choose-hike', methods=['GET', 'POST'])
 def enter_hike():
-	#hikes = hike_ids.values()
-	return render_template('choose-hike.html')#, hikes=hikes)
+	hikes = hike_ids.values()
+	return render_template('choose-hike.html', hikes=hikes)
 
 @app.route('/personal-recs', methods=['GET', 'POST'])
 def enter_username():
