@@ -16,7 +16,7 @@ I set out to ask the following questions:
 3) *Can I create a Power Ratings that blends together total number of reviews and average rating for a given hike?*
 
 
-To answer these questions, I built a full-stack machine learning web application, [Trail Secrets] (https://www.trailsecrets.com), which provides users with intelligent hiking recommendations based on AllTrails user reviews and hiking trail attributes. This application can help power AllTrails web, Android and iOS applications as the first set of intelligent algorithms that would personalize the AllTrails user experience to find better trails.
+To answer these questions, I built a full-stack machine learning web application, [Trail Secrets](https://www.trailsecrets.com), which provides users with intelligent hiking recommendations based on AllTrails user reviews and hiking trail attributes. This application can help power AllTrails web, Android and iOS applications as the first set of intelligent algorithms that would personalize the AllTrails user experience to find better trails.
 
 
 Comments or Questions? Please email me at: perryrjohnson7@gmail.com
